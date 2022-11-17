@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.UserMapper">
+<!--    List<Users> getAll();-->
+            <!--    //查询用户全部信息-->
+    <select id="getAll" resultType="users">
+    select id,username,birthday,sex,address
+    from users
+    </select>
+
+<!--    private Integer id ;-->
+<!--    private String userName;-->
+<!--    private Date birthday;-->
+<!--    private String sex;-->
+<!--    private String address;-->
+        <!--根据主键id更新信息-->
+    <update id="update" parameterType="users">
+        update users set userName=#{userName},birthday=#{birthday},sex=#{sex},address=#{address}
+        where id=#{id}
+    </update>
+<!--    Users getById(Integer id);-->
+<!--    private Integer id ;-->
+<!--    private String userName;-->
+<!--    private Date birthday;-->
+<!--    private String sex;-->
+<!--    private String address;-->
+    <select id="getById" resultType="users">
+        select id,userName,birthday,sex, address
+        from users where id=#{id}
+    </select>
+        <!--      List<Users> getByName(String name);-->
+    <select id="getByName" parameterType="String" resultType="users" >
+        select id,userName,birthday,sex, address
+        from users where userName like concat('%',#{name},'%')
+    </select>
+<!--    int addOneUser (Users users);-->
+    <insert id="addOneUser" parameterType="users">
+        insert into users
+        values (#{id},#{userName},#{birthday},#{sex},#{address})
+    </insert>
+        <!--    int delOneUser(Integer id);-->
+    <delete id="delOneUser" parameterType="int">
+        delete from users where id=#{id}
+    </delete>
+<!--    List<Users> getByNameOrAddress(
+            @Param("columnName")
+            String columnName,
+            @Param("columnValue")
+            String columnValue);-->
+
+    <select id="getByNameOrAddress" resultType="users">
+        select id,userName,birthday,sex, address
+        from users
+        where ${columnName} like concat('%',#{columnValue},'%')
+    </select>
+
+</mapper>

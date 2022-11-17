@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--mapper:是整个文件的大标签，用来开始和结束xml文件
+属性：
+    namespace:指定命名空间（就相当于包名），用来区分不同的mapper.xml
+    中相同的id属性；
+-->
+<mapper namespace="zar">
+<!--
+    完成查询全部学生功能
+    List<Student>getAll();
+        resultType:指定查询返回的结果集的类型，如果是集合，则必须是范型的类型
+        parameterType: 如果有参数，则通过它来指定参数类型
+-->
+    <select id="getAll" resultType="org.yyyy.Student">
+        select id,name,email,age
+        from student
+    </select>
+
+
+    <select id="getById" parameterType="int" resultType="org.yyyy.Student">
+        select id,name,email,age
+        from student
+        where id=#{id}
+    </select>
+
+
+
+</mapper>
